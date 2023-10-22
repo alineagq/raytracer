@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/21 23:41:49 by aqueiroz          #+#    #+#              #
-#    Updated: 2023/10/22 00:30:00 by aqueiroz         ###   ########.fr        #
+#    Created: 2023/10/22 00:17:29 by aqueiroz          #+#    #+#              #
+#    Updated: 2023/10/22 00:29:50 by aqueiroz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = raytracer
+NAME = libvector.a
 
-FILES = main.c
+FILES = vector.c vector_operations.c vector_rotations.c
 
 OBJ = $(FILES:.c=.o)
 
@@ -22,18 +22,15 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libs/vector
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) -L libs/vector -lvector
+	ar rc $(NAME) $(OBJ)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	make -C libs/vector clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C libs/vector fclean
 	rm -f $(NAME)
 
 re: fclean all
